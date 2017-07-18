@@ -2,6 +2,7 @@ package com.hackerrank.apocarteres.findRunningMedian;
 
 import java.io.*;
 import java.util.Comparator;
+import java.util.NavigableSet;
 import java.util.TreeSet;
 
 import static java.lang.Integer.parseInt;
@@ -19,8 +20,8 @@ public class Solution {
     public void median(Reader in, Writer out) throws IOException {
         BufferedReader reader = new BufferedReader(in);
         int n = parseInt(reader.readLine());
-        TreeSet<Integer> left = new TreeSet<>(INTEGER_COMPARATOR);
-        TreeSet<Integer> right = new TreeSet<>(INTEGER_COMPARATOR);
+        NavigableSet<Integer> left = new TreeSet<>(INTEGER_COMPARATOR);
+        NavigableSet<Integer> right = new TreeSet<>(INTEGER_COMPARATOR);
         for (int i = 0; i < n; i++) {
             int v = parseInt(reader.readLine());
             left.add(v);
@@ -46,7 +47,7 @@ public class Solution {
         out.flush();
     }
 
-    private static double median(TreeSet<Integer> left, TreeSet<Integer> right) {
+    private static double median(NavigableSet<Integer> left, NavigableSet<Integer> right) {
         if (left.size() == right.size()) {
             return ((double) left.last() + right.first()) / 2.0;
         }
