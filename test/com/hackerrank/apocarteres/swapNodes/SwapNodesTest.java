@@ -17,11 +17,11 @@ public class SwapNodesTest {
 
     private static final Node NULL_NODE = new Node(-1);
 
-    private SwapNodes instance;
+    private Solution instance;
 
     @Before
     public void setUp() throws Exception {
-        instance = new SwapNodes();
+        instance = new Solution();
     }
 
     @Test

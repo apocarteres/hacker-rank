@@ -10,12 +10,12 @@ import static java.lang.String.join;
 import static java.util.stream.Collectors.toList;
 
 //https://www.hackerrank.com/challenges/swap-nodes-algo/problem
-public class SwapNodes {
+public class Solution {
 
     private static final Pattern NODE_ENTRY_PATTERN = Pattern.compile("(-?\\d+)\\s(-?\\d+)");
 
     public static void main(String[] args) throws IOException {
-        new SwapNodes().solve(
+        new Solution().solve(
                 new BufferedReader(new InputStreamReader(System.in)),
                 new BufferedWriter(new OutputStreamWriter(System.out))
         );

@@ -1,4 +1,4 @@
-package com.hackerrank.apocarteres;
+package com.hackerrank.apocarteres.findRunningMedian;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,11 +17,11 @@ import static org.junit.Assert.assertEquals;
 
 public final class FindRunningMedianTest {
 
-    private FindRunningMedian instance;
+    private Solution instance;
 
     @Before
     public void setUp() throws Exception {
-        instance = new FindRunningMedian();
+        instance = new Solution();
     }
 
     @Test
@@ -53,10 +53,12 @@ public final class FindRunningMedianTest {
     @Test
     public void testCase2() throws Exception {
         List<String> input = new BufferedReader(
-                new InputStreamReader(FindRunningMedianTest.class.getResourceAsStream("/find-running-median/test-case2-in.txt"))
+                new InputStreamReader(FindRunningMedianTest.class.getResourceAsStream(
+                        "/find-running-median/test-case2-in.txt"))
         ).lines().collect(toList());
         List<String> expected = new BufferedReader(
-                new InputStreamReader(FindRunningMedianTest.class.getResourceAsStream("/find-running-median/test-case2-out.txt"))
+                new InputStreamReader(FindRunningMedianTest.class.getResourceAsStream(
+                        "/find-running-median/test-case2-out.txt"))
         ).lines().collect(toList());
         StringWriter out = new StringWriter();
         instance.median(new StringReader(asText(input)), out);

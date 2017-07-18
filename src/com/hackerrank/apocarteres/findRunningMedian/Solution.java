@@ -1,4 +1,4 @@
-package com.hackerrank.apocarteres;
+package com.hackerrank.apocarteres.findRunningMedian;
 
 import java.io.*;
 import java.util.Comparator;
@@ -9,11 +9,11 @@ import static java.lang.String.format;
 import static java.util.Objects.isNull;
 
 //https://www.hackerrank.com/challenges/find-the-running-median
-public class FindRunningMedian {
+public class Solution {
     private static final Comparator<Integer> INTEGER_COMPARATOR = (a, b) -> a.equals(b) ? 1 : Integer.compare(a, b);
 
     public static void main(String[] args) throws IOException {
-        new FindRunningMedian().median(new InputStreamReader(System.in), new OutputStreamWriter(System.out));
+        new Solution().median(new InputStreamReader(System.in), new OutputStreamWriter(System.out));
     }
 
     public void median(Reader in, Writer out) throws IOException {
