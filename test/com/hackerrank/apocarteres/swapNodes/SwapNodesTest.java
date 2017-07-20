@@ -154,7 +154,6 @@ public class SwapNodesTest {
                         new Node(2).with(NULL_NODE, new Node(8)),
                         new Node(3).with(NULL_NODE, new Node(5))
                 );
-        List<Integer> sink = new ArrayList<>();
         List<Integer> expected = new ArrayList<Integer>() {{
             add(2);
             add(8);
@@ -162,8 +161,8 @@ public class SwapNodesTest {
             add(3);
             add(5);
         }};
-        instance.sink(tree, sink);
-        assertEquals(expected, sink);
+        List<Integer> actual = instance.sink(tree);
+        assertEquals(expected, actual);
     }
 
     @Test

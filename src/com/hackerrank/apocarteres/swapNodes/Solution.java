@@ -7,12 +7,14 @@ import java.util.regex.Pattern;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.String.join;
+import static java.util.Collections.emptyList;
+import static java.util.regex.Pattern.compile;
 import static java.util.stream.Collectors.toList;
 
 //https://www.hackerrank.com/challenges/swap-nodes-algo/problem
 public class Solution {
 
-    private static final Pattern NODE_ENTRY_PATTERN = Pattern.compile("(-?\\d+)\\s(-?\\d+)");
+    private static final Pattern NODE_ENTRY_PATTERN = compile("(-?\\d+)\\s(-?\\d+)");
 
     public static void main(String[] args) throws IOException {
         new Solution().solve(
@@ -27,9 +29,7 @@ public class Solution {
         for (int i = 0; i < rotations; i++) {
             int swapIndex = parseInt(reader.readLine());
             swap(tree, 1, swapIndex);
-            List<Integer> sink = new ArrayList<>();
-            sink(tree, sink);
-            print(sink, writer);
+            print(sink(tree), writer);
             if (i < rotations - 1) {
                 writer.newLine();
             }
@@ -77,13 +77,15 @@ public class Solution {
         return new Node[]{left, right};
     }
 
-    void sink(Node root, List<Integer> out) {
+    List<Integer> sink(Node root) {
         if (root.leaf()) {
-            return;
+            return emptyList();
         }
-        sink(root.left, out);
-        out.add(root.value);
-        sink(root.right, out);
+        List<Integer> result = new ArrayList<>();
+        result.addAll(sink(root.left));
+        result.add(root.value);
+        result.addAll(sink(root.right));
+        return result;
     }
 
     Node swap(Node root) {

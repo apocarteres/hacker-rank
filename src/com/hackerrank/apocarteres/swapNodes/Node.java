@@ -23,14 +23,14 @@ final class Node {
         return new Node(value, left, right);
     }
 
-    boolean leaf(){
+    boolean leaf() {
         return value == -1;
     }
 
     @Override
     public String toString() {
-        if (value == -1) {
-            return "LEAF";
+        if (leaf()) {
+            return "nil";
         }
         return "{" +
                 "v:" + value +
