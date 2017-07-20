@@ -17,10 +17,11 @@ public class Solution {
     private static final Pattern NODE_ENTRY_PATTERN = compile("(-?\\d+)\\s(-?\\d+)");
 
     public static void main(String[] args) throws IOException {
-        new Solution().solve(
-                new BufferedReader(new InputStreamReader(System.in)),
-                new BufferedWriter(new OutputStreamWriter(System.out))
-        );
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+            try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out))) {
+                new Solution().solve(reader, writer);
+            }
+        }
     }
 
     void solve(BufferedReader reader, BufferedWriter writer) throws IOException {
@@ -34,12 +35,10 @@ public class Solution {
                 writer.newLine();
             }
         }
-        writer.close();
     }
 
     void print(List<Integer> sink, Writer writer) throws IOException {
         writer.write(join(" ", sink.stream().map(String::valueOf).collect(toList())));
-        writer.flush();
     }
 
     Node build(BufferedReader reader) throws IOException {
@@ -86,18 +85,6 @@ public class Solution {
         result.add(root.value);
         result.addAll(sink(root.right));
         return result;
-    }
-
-    Node swap(Node root) {
-        if (root.leaf()) {
-            return root;
-        }
-        root.left = swap(root.left);
-        root.right = swap(root.right);
-        Node l = root.left;
-        root.left = root.right;
-        root.right = l;
-        return root;
     }
 
     void swap(Node root, int index, int level) {

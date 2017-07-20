@@ -31,6 +31,7 @@ public class SwapNodesTest {
         StringWriter out = new StringWriter();
         BufferedWriter writer = new BufferedWriter(out);
         instance.solve(new BufferedReader(new StringReader(input)), writer);
+        writer.close();
         String actual = out.toString();
         assertEquals(expected, actual);
     }
@@ -84,28 +85,6 @@ public class SwapNodesTest {
                         )
                 );
         Node actual = instance.build(new BufferedReader(new StringReader(asText(input))));
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void thatRecursiveSwapWell() throws Exception {
-        Node input =
-                new Node(1).with(
-                        new Node(2),
-                        new Node(3).with(
-                                NULL_NODE,
-                                new Node(5)
-                        )
-                );
-        Node expected =
-                new Node(1).with(
-                        new Node(3).with(
-                                new Node(5),
-                                NULL_NODE
-                        ),
-                        new Node(2)
-                );
-        Node actual = instance.swap(input);
         assertEquals(expected, actual);
     }
 
