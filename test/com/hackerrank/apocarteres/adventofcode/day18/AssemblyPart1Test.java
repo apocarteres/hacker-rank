@@ -1,14 +1,13 @@
-package com.hackerrank.apocarteres;
+package com.hackerrank.apocarteres.adventofcode.day18;
 
-import com.hackerrank.apocarteres.adventofcode.day18.Assembly;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class AssemblyTest {
+public class AssemblyPart1Test {
     @Test
     public void thatAddsValue() throws Exception {
-        Assembly assembly = new Assembly();
+        AssemblyPart1 assembly = new AssemblyPart1();
         int actual = assembly.exec(new String[]{
                 "add x 1",
                 "snd x",
@@ -19,7 +18,7 @@ public class AssemblyTest {
 
     @Test
     public void thatSetsValue() throws Exception {
-        Assembly assembly = new Assembly();
+        AssemblyPart1 assembly = new AssemblyPart1();
         int actual = assembly.exec(new String[]{
                 "set x 5",
                 "snd x",
@@ -30,7 +29,7 @@ public class AssemblyTest {
 
     @Test
     public void thatMulsValue() throws Exception {
-        Assembly assembly = new Assembly();
+        AssemblyPart1 assembly = new AssemblyPart1();
         int actual = assembly.exec(new String[]{
                 "set x 5",
                 "mul x 4",
@@ -42,7 +41,7 @@ public class AssemblyTest {
 
     @Test
     public void thatModsValue() throws Exception {
-        Assembly assembly = new Assembly();
+        AssemblyPart1 assembly = new AssemblyPart1();
         int actual = assembly.exec(new String[]{
                 "set x 9",
                 "mod x 5",
@@ -54,7 +53,7 @@ public class AssemblyTest {
 
     @Test
     public void thatReadsValueFromRegister() throws Exception {
-        Assembly assembly = new Assembly();
+        AssemblyPart1 assembly = new AssemblyPart1();
         int actual = assembly.exec(new String[]{
                 "set x 9",
                 "set y -2",
@@ -67,7 +66,7 @@ public class AssemblyTest {
 
     @Test
     public void thatJgzSkips() throws Exception {
-        Assembly assembly = new Assembly();
+        AssemblyPart1 assembly = new AssemblyPart1();
         int actual = assembly.exec(new String[]{
                 "jgz x 10",
                 "set x 1",
@@ -79,7 +78,7 @@ public class AssemblyTest {
 
     @Test
     public void thatJgzStepsAhead() throws Exception {
-        Assembly assembly = new Assembly();
+        AssemblyPart1 assembly = new AssemblyPart1();
         int actual = assembly.exec(new String[]{
                 "set x 1",
                 "jgz x 2",
@@ -92,7 +91,7 @@ public class AssemblyTest {
 
     @Test
     public void thatJgzStepsBack() throws Exception {
-        Assembly assembly = new Assembly();
+        AssemblyPart1 assembly = new AssemblyPart1();
         int actual = assembly.exec(new String[]{
                 "jgz x 4",
                 "set x 25",
@@ -106,7 +105,7 @@ public class AssemblyTest {
 
     @Test
     public void thatRcvPlaysLatestSnd() throws Exception {
-        Assembly assembly = new Assembly();
+        AssemblyPart1 assembly = new AssemblyPart1();
         int actual = assembly.exec(new String[]{
                 "set x 5",
                 "snd x",
@@ -118,7 +117,7 @@ public class AssemblyTest {
 
     @Test
     public void thatInput1IdCorrect() throws Exception {
-        Assembly assembly = new Assembly();
+        AssemblyPart1 assembly = new AssemblyPart1();
         int actual = assembly.exec(new String[]{
                 "set a 1",
                 "add a 2",

@@ -17,7 +17,7 @@ import static java.util.Objects.isNull;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
 
-public final class Assembly {
+public final class AssemblyPart1 {
 
     private static final Pattern PATTERN = Pattern.compile(
             "(?<command>[a-z]+)\\s(?<register>[a-z])\\s?(?<i32value>-?\\d+)?(?<regvalue>[a-z])?");
@@ -28,10 +28,10 @@ public final class Assembly {
     private int recovered;
 
     public static void main(String[] args) throws IOException {
-        System.out.println(new Assembly().exec(loadInput()));
+        System.out.println(new AssemblyPart1().exec(loadInput()));
     }
 
-    public Assembly() {
+    AssemblyPart1() {
         this.registers = new HashMap<>();
         this.operations = new HashMap<>();
         this.sounds = new HashMap<>();
@@ -44,7 +44,7 @@ public final class Assembly {
         this.operations.put("rcv", (r, v) -> recover(r));
     }
 
-    public int exec(String[] args) {
+    int exec(String[] args) {
         for (int i = 0; i < args.length; i += stackOffset) {
             stackOffset = 1;
             eval(args[i]);
@@ -103,7 +103,7 @@ public final class Assembly {
 
     private static String[] loadInput() {
         List<String> collect;
-        try (InputStream is = Assembly.class.getResourceAsStream("assembly.txt")) {
+        try (InputStream is = AssemblyPart1.class.getResourceAsStream("assembly.txt")) {
             collect = new BufferedReader(new InputStreamReader(is)).lines().collect(toList());
         } catch (IOException e) {
             throw new RuntimeException("can't read file", e);
