@@ -125,17 +125,6 @@ public final class AssemblyPart2 {
         }
     }
 
-    private ValueVariant readVariant(String s) {
-        if (isNull(s)) {
-            return null;
-        }
-        char c = s.charAt(0);
-        if (Character.isAlphabetic(c)) {
-            return new ValueVariant(c, null);
-        }
-        return new ValueVariant(null, Long.parseLong(s));
-    }
-
     private Long compute(Character r, Function<Long, Long> v) {
         return registers.compute(r, (k, b) -> isNull(b) ? v.apply(0L) : v.apply(b));
     }
@@ -145,6 +134,17 @@ public final class AssemblyPart2 {
             return v.value;
         }
         return registers.getOrDefault(v.register, 0L);
+    }
+
+    private static ValueVariant readVariant(String s) {
+        if (isNull(s)) {
+            return null;
+        }
+        char c = s.charAt(0);
+        if (Character.isAlphabetic(c)) {
+            return new ValueVariant(c, null);
+        }
+        return new ValueVariant(null, Long.parseLong(s));
     }
 
     private static String[] loadInput() {
