@@ -12,6 +12,7 @@ import static java.util.Collections.emptySet;
 import static java.util.Collections.singleton;
 
 public class Solution {
+
     public List<Integer> getAnagramIndices(String haystack, String needle) {
         Set<String> p = perm(needle);
         List<Integer> result = new ArrayList<>();
@@ -25,6 +26,7 @@ public class Solution {
         result.sort(Integer::compare);
         return result;
     }
+
 
     private static Set<String> perm(String needle) {
         if (needle.isEmpty()) {
