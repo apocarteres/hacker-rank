@@ -31,17 +31,6 @@ public final class Assembly {
         System.out.println(new Assembly().exec(loadInput()));
     }
 
-    private static String[] loadInput() {
-        List<String> collect;
-        try (InputStream is = Assembly.class.getResourceAsStream("assembly.txt")) {
-            collect = new BufferedReader(new InputStreamReader(is)).lines().collect(toList());
-        } catch (IOException e) {
-            throw new RuntimeException("can't read file", e);
-        }
-        String[] result = new String[collect.size()];
-        return collect.toArray(result);
-    }
-
     Assembly() {
         this.registers = new HashMap<>();
         this.operations = new HashMap<>();
@@ -110,5 +99,16 @@ public final class Assembly {
 
     private Long compute(Character r, Function<Long, Long> v) {
         return registers.compute(r, (k, b) -> isNull(b) ? v.apply(0L) : v.apply(b));
+    }
+
+    private static String[] loadInput() {
+        List<String> collect;
+        try (InputStream is = Assembly.class.getResourceAsStream("assembly.txt")) {
+            collect = new BufferedReader(new InputStreamReader(is)).lines().collect(toList());
+        } catch (IOException e) {
+            throw new RuntimeException("can't read file", e);
+        }
+        String[] result = new String[collect.size()];
+        return collect.toArray(result);
     }
 }
