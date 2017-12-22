@@ -27,14 +27,14 @@ public final class AssemblyPart2 {
     private final Map<String, BiConsumer<ValueVariant, ValueVariant>> operations;
     private final Map<Character, Long> registers;
     private final BlockingQueue<Long> receiveBuffer;
-    private int programId;
-    private int stackOffset;
-    private AtomicBoolean pending;
-    private boolean terminated;
-    private int sent;
+    private final AtomicBoolean pending;
+    private final int programId;
     private AssemblyPart2 remote;
+    private boolean terminated;
+    private int stackOffset;
+    private int sent;
 
-    public static void main(String[] args) throws IOException, ExecutionException, InterruptedException {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
         AssemblyPart2 one = new AssemblyPart2(0);
         AssemblyPart2 two = new AssemblyPart2(1);
         String[] input = loadInput();
