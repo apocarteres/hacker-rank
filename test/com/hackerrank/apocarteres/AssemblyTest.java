@@ -1,5 +1,6 @@
 package com.hackerrank.apocarteres;
 
+import com.hackerrank.apocarteres.adventofcode.day18.Assembly;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

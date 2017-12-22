@@ -31,7 +31,7 @@ public final class Assembly {
         System.out.println(new Assembly().exec(loadInput()));
     }
 
-    Assembly() {
+    public Assembly() {
         this.registers = new HashMap<>();
         this.operations = new HashMap<>();
         this.sounds = new HashMap<>();
@@ -44,7 +44,7 @@ public final class Assembly {
         this.operations.put("rcv", (r, v) -> recover(r));
     }
 
-    int exec(String[] args) {
+    public int exec(String[] args) {
         for (int i = 0; i < args.length; i += stackOffset) {
             stackOffset = 1;
             eval(args[i]);
