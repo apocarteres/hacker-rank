@@ -12,6 +12,28 @@ import static java.util.Arrays.binarySearch;
 public final class MinionGameSolution {
   private static final char[] VOWELS = {'A', 'E', 'I', 'O', 'U'};
 
+  public static void main(String[] args) throws IOException {
+    var input = new BufferedReader(new FileReader(args[0])).readLine();
+    var startedAt = System.currentTimeMillis();
+    var stuart = new Player("Stuart", s -> !vowelsOnly(s)).solve(input);
+    var kevin = new Player("Kevin", MinionGameSolution::vowelsOnly).solve(input);
+    Result result;
+    if (stuart.score == kevin.score) {
+      out.println("Draw");
+      return;
+    } else if (kevin.score > stuart.score) {
+      result = kevin;
+    } else {
+      result = stuart;
+    }
+    out.printf("%s %d%n", result.name, result.score);
+    out.printf("took %d ms%n", System.currentTimeMillis() - startedAt);
+  }
+
+  private static boolean vowelsOnly(Character s) {
+    return binarySearch(VOWELS, s) >= 0;
+  }
+
   private static final class Result {
     private final String name;
     private final long score;
@@ -43,25 +65,4 @@ public final class MinionGameSolution {
     }
   }
 
-  public static void main(String[] args) throws IOException {
-    var input = new BufferedReader(new FileReader(args[0])).readLine();
-    var startedAt = System.currentTimeMillis();
-    var stuart = new Player("Stuart", s -> !vowelsOnly(s)).solve(input);
-    var kevin = new Player("Kevin", MinionGameSolution::vowelsOnly).solve(input);
-    Result result;
-    if (stuart.score == kevin.score) {
-      out.println("Draw");
-      return;
-    } else if (kevin.score > stuart.score) {
-      result = kevin;
-    } else {
-      result = stuart;
-    }
-    out.printf("%s %d%n", result.name, result.score);
-    out.printf("took %d ms%n", System.currentTimeMillis() - startedAt);
-  }
-
-  private static boolean vowelsOnly(Character s) {
-    return binarySearch(VOWELS, s) >= 0;
-  }
 }
