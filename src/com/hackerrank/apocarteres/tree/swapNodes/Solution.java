@@ -1,4 +1,6 @@
-package com.hackerrank.apocarteres.swapNodes;
+package com.hackerrank.apocarteres.tree.swapNodes;
+
+import com.hackerrank.apocarteres.tree.IntNode;
 
 import java.io.*;
 import java.util.*;
@@ -24,8 +26,8 @@ public class Solution {
         }
     }
 
-    void solve(BufferedReader reader, BufferedWriter writer) throws IOException {
-        Node tree = build(reader);
+    public void solve(BufferedReader reader, BufferedWriter writer) throws IOException {
+        IntNode tree = build(reader);
         int rotations = parseInt(reader.readLine());
         for (int i = 0; i < rotations; i++) {
             int swapIndex = parseInt(reader.readLine());
@@ -37,67 +39,67 @@ public class Solution {
         }
     }
 
-    void print(List<Integer> sink, Writer writer) throws IOException {
+    public void print(List<Integer> sink, Writer writer) throws IOException {
         writer.write(join(" ", sink.stream().map(String::valueOf).collect(toList())));
     }
 
-    Node build(BufferedReader reader) throws IOException {
+    public IntNode build(BufferedReader reader) throws IOException {
         int length = parseInt(reader.readLine());
-        List<Node[]> nodes = new ArrayList<>();
+        List<IntNode[]> nodes = new ArrayList<>();
         for (int i = 0; i < length; i++) {
             nodes.add(buildNode(reader));
         }
-        Iterator<Node[]> it = nodes.iterator();
-        Deque<Node> queue = new LinkedList<>();
-        Node root = new Node(1);
+        Iterator<IntNode[]> it = nodes.iterator();
+        Deque<IntNode> queue = new LinkedList<>();
+        IntNode root = new IntNode(1);
         queue.add(root);
         while (it.hasNext()) {
-            Node[] pair = it.next();
-            Node node = queue.poll();
-            node.left = pair[0];
-            node.right = pair[1];
-            if (!node.left.leaf()) {
-                queue.add(node.left);
+            IntNode[] pair = it.next();
+//            Node node = queue.poll();
+            IntNode left = pair[0];
+            IntNode right = pair[1];
+            if (!left.leaf()) {
+                queue.add(left);
             }
-            if (!node.right.leaf()) {
-                queue.add(node.right);
+            if (!right.leaf()) {
+                queue.add(right);
             }
         }
         return root;
     }
 
-    Node[] buildNode(BufferedReader reader) throws IOException {
+    IntNode[] buildNode(BufferedReader reader) throws IOException {
         String input = reader.readLine();
         Matcher matcher = NODE_ENTRY_PATTERN.matcher(input);
         //noinspection ResultOfMethodCallIgnored
         matcher.find();
-        Node left = new Node(parseInt(matcher.group(1)));
-        Node right = new Node(parseInt(matcher.group(2)));
-        return new Node[]{left, right};
+        IntNode left = new IntNode(parseInt(matcher.group(1)));
+        IntNode right = new IntNode(parseInt(matcher.group(2)));
+        return new IntNode[]{left, right};
     }
 
-    List<Integer> sink(Node root) {
+    public List<Integer> sink(IntNode root) {
         if (root.leaf()) {
             return emptyList();
         }
         List<Integer> result = new ArrayList<>();
-        result.addAll(sink(root.left));
-        result.add(root.value);
-        result.addAll(sink(root.right));
+        result.addAll(sink(root.left()));
+        result.add(root.value());
+        result.addAll(sink(root.right()));
         return result;
     }
 
-    void swap(Node root, int index, int level) {
+    public void swap(IntNode root, int index, int level) {
         if (root.leaf()) {
             return;
         }
         if (index % level == 0) {
-            Node left = root.left;
-            root.left = root.right;
-            root.right = left;
+            IntNode left = root.left();
+            root.setLeft(root.right());
+            root.setRight(left);
         }
-        swap(root.left, index + 1, level);
-        swap(root.right, index + 1, level);
+        swap(root.left(), index + 1, level);
+        swap(root.right(), index + 1, level);
     }
 
 }
