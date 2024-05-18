@@ -1,5 +1,7 @@
 package com.hackerrank.apocarteres.list.mergesorted;
 
+import com.hackerrank.apocarteres.common.ListNode;
+
 import java.time.Instant;
 
 
@@ -42,45 +44,7 @@ import java.time.Instant;
  * The sum of lists[i].length will not exceed 104.
  */
 
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- * int val;
- * ListNode next;
- * ListNode() {}
- * ListNode(int val) { this.val = val; }
- * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
-
-class ListNode {
-  int val;
-  ListNode next;
-
-  ListNode() {
-  }
-
-  ListNode(int val) {
-    this.val = val;
-  }
-
-  ListNode(int val, ListNode next) {
-    this.val = val;
-    this.next = next;
-  }
-}
-
 class Solution {
-  static void printList(ListNode node) {
-    System.out.print("list: ");
-    var next = node;
-    while (next != null) {
-      System.out.print(next.val);
-      next = next.next;
-    }
-    System.out.println();
-  }
-
   public static void main(String[] args) {
     Solution solution = new Solution();
     ListNode[] nodes = {
@@ -93,18 +57,34 @@ class Solution {
     node = solution.mergeKLists(nodes);
     t = Instant.now().getNano() - t;
     System.out.println("test1");
-    printList(node);
+    node.print();
     System.out.println("time: " + t);
     System.out.println("test2");
-    printList(solution.mergeKLists(new ListNode[]{
+    solution.mergeKLists(new ListNode[]{
       new ListNode(),
       new ListNode(1),
-    }));
+    }).print();
     System.out.println("test3");
-    printList(solution.mergeKLists(new ListNode[]{
+    solution.mergeKLists(new ListNode[]{
       new ListNode(5),
       new ListNode(),
-    }));
+    }).print();
+    System.out.println("test4");
+    node = null;
+    for (int i=0; i< 10000; ++i) {
+      node = new ListNode(i, node);
+    }
+    nodes = new ListNode[]{
+      node,
+      new ListNode(3000),
+      new ListNode(5000),
+    };
+    t = Instant.now().getNano();
+    node = solution.mergeKLists(nodes);
+    t = Instant.now().getNano() - t;
+//    printList(node);
+    System.out.println("time: " + t);
+
   }
 
   public ListNode mergeKLists(ListNode[] nodes) {
@@ -114,12 +94,12 @@ class Solution {
     // 1,4,[5] | 2,[6] -> 5
     // 2,[6] -> 6
     // result: 1,1,2,3,4,4,5,6
-    ListNode parent = null;
+    ListNode parent = null; // to keep root ref, otherwise memory will be released (c++ winks here)
     ListNode child = null;
-    var nodes_length = nodes.length;
+    var length = nodes.length;
     while (true) {
       ListNode min = null;
-      for (var i = 0; i < nodes_length; ++i) {
+      for (var i = 0; i < length; ++i) {
         var node = nodes[i];
         if (node == null) {
           continue;
@@ -131,7 +111,7 @@ class Solution {
       if (min == null) {
         break;
       }
-      for (var i = 0; i < nodes_length; ++i) {
+      for (var i = 0; i < length; ++i) {
         var node = nodes[i];
         if (node == null) {
           continue;
@@ -149,8 +129,8 @@ class Solution {
           //
           nodes[i] = node.next;
           if (nodes[i] == null) {
-            nodes[i] = nodes[nodes_length - 1];
-            --nodes_length;
+            nodes[i] = nodes[length - 1];
+            --length;
           }
         }
       }

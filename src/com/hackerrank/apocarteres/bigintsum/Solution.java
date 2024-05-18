@@ -1,5 +1,7 @@
 package com.hackerrank.apocarteres.bigintsum;
 
+import com.hackerrank.apocarteres.common.ListNode;
+
 import java.time.Instant;
 
 /**
@@ -28,32 +30,6 @@ import java.time.Instant;
  * It is guaranteed that the list represents a number that does not have leading zeros.
  */
 class Solution {
-  static class ListNode {
-    int val;
-    ListNode next;
-
-    ListNode() {
-    }
-
-    ListNode(int val) {
-      this.val = val;
-    }
-
-    ListNode(int val, ListNode next) {
-      this.val = val;
-      this.next = next;
-    }
-  }
-
-  static void printList(ListNode node) {
-    var next = node;
-    while (next != null) {
-      System.out.print(next.val);
-      next = next.next;
-    }
-    System.out.println();
-  }
-
   public static void main(String[] args) {
     var l1 = new ListNode(8, new ListNode(3));
     var l2 = new ListNode(9, new ListNode(5, new ListNode(1)));
@@ -61,7 +37,7 @@ class Solution {
     long t = Instant.now().getNano();
     var r = solution.addTwoNumbers(l1, l2);
     t = Instant.now().getNano() - t;
-    printList(r);
+    r.print();
     System.out.println("time: " + t);
   }
 
